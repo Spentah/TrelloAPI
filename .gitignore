@@ -1,0 +1,6 @@
+# Project exclude paths
+/target/
+*.txt
+/allure-results
+/build
+/.idea/sonarlint
