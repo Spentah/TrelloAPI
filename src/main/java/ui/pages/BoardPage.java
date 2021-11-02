@@ -7,6 +7,8 @@ import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.log4testng.Logger;
 import org.testng.reporters.jq.Main;
@@ -23,10 +25,10 @@ public class BoardPage {
     private SelenideElement dateCheckbox = Selenide.$x("//a[contains(@class,'due-date-complete')]");
     private List<SelenideElement> cards = Selenide.$$x("//div[contains(@class,'list-cards')]");
     private List<SelenideElement> listHeaders = Selenide.$$x("//div[contains(@class,'list-header js-list')]");
-    private List<SelenideElement> headerButtons = Selenide.$$x("//a[contains(@class,'board-header-btn')]");
     private List<SelenideElement> checkedCheckboxes = Selenide.$$x("//div[contains(@class,'item-state-complete')]");
     private SelenideElement closeButton = Selenide.$x("//a[contains(@class,'icon-close') and not (contains(@class,'icon-lg'))]");
     private SelenideElement windowMenu = Selenide.$x("//a[contains(@class,'window-cover-menu')]");
+    private List<SelenideElement> headerButtons = $$x("//div[contains(@class,'board-header-btn')]");
 
     public BoardPage clickOnCardByName(String name) {
         if (cards.stream().anyMatch(e -> e.getText().contains(name))) {
@@ -73,7 +75,7 @@ public class BoardPage {
     public BoardPage chooseAndClickOnColor(Colors color) {
         switch (color) {
             case GREEN : color.GREEN.getColor().shouldBe(exist).click();
-                        break;
+                break;
             case YELLOW : color.YELLOW.getColor().shouldBe(exist).click();
                 break;
             case ORANGE : color.ORANGE.getColor().shouldBe(exist).click();
@@ -104,6 +106,14 @@ public class BoardPage {
             return this;
         }
         dateCheckbox.shouldBe(exist).click();
+        return this;
+    }
+
+    public BoardPage renameBoard(String oldName, String newName) {
+        SelenideElement inputField = headerButtons.stream().filter(SelenideElement::isDisplayed).filter(element -> element.getText().equals(oldName))
+                .findFirst().orElseThrow(() -> new RuntimeException("Нет поля с таким названием"));
+        new Actions(inputField.getWrappedDriver()).moveToElement(inputField).click()
+                .sendKeys(Keys.BACK_SPACE, newName, Keys.ENTER).build().perform();
         return this;
     }
 }

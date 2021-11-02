@@ -10,13 +10,13 @@ import static com.codeborne.selenide.Condition.*;
 
 public class LoginPage {
     private SelenideElement submitButton = $x("//*[@type='submit']");
-    private List<SelenideElement> buttons = $$(By.xpath("//a[contains(@class,'btn')] | //input[contains(@class,'button')]"));
+    private SelenideElement signupButton = $x("//a[@href='/login']");
+//            $$(By.xpath("//a[contains(@class,'btn')] | //input[contains(@class,'button')]"));
     private SelenideElement userField = $(By.id("user"));
     private SelenideElement passwordField = $(By.id("password"));
 
-    public LoginPage clickButton(String buttonName) {
-        buttons.stream().filter(e -> e.getText().equals(buttonName)).findFirst()
-                .get().shouldBe(visible).click();
+    public LoginPage clickSignUp() {
+        signupButton.shouldBe(exist).click();
         return this;
     }
 

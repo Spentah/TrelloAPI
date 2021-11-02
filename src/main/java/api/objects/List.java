@@ -1,18 +1,19 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
+import api.utils.RequestSpecUtil;
 import hooks.Hooks;
 import io.restassured.response.Response;
 import api.utils.ResponseParser;
 
 import static io.restassured.RestAssured.given;
 
-public class List extends Hooks {
+public class List {
 
     private String id;
 
     public void createList(String boardId, String listName) {
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", boardId)
                 .queryParam("name", listName)
                 .post(EndPoints.LIST.getEndPoint());
@@ -22,7 +23,7 @@ public class List extends Hooks {
     }
 
     public void moveList(String idListOld, String idBoard, String idListNew) {
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idListOld)
                 .queryParams("idBoard", idBoard, "idList", idListNew)
                 .when()
@@ -31,7 +32,7 @@ public class List extends Hooks {
     }
 
     public void archiveList(String idList, boolean value) {
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idList)
                 .queryParams("value", value)
                 .when()

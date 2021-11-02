@@ -1,15 +1,16 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
+import api.utils.RequestSpecUtil;
 import hooks.Hooks;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class Description extends Hooks {
+public class Description {
 
     public void addDescription(String idCard, String description) {
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idCard)
                 .queryParam("desc", description)
                 .when()

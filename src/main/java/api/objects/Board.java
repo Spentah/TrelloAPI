@@ -1,18 +1,19 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
+import api.utils.RequestSpecUtil;
 import api.utils.ResponseParser;
 import hooks.Hooks;
 import io.restassured.response.Response;
 
 import static io.restassured.RestAssured.given;
 
-public class Board extends Hooks {
+public class Board {
 
     private String id;
 
     public void createBoard(String name) {
-        Response response = given().spec(specification).log().all()
+        Response response = given().spec(RequestSpecUtil.getSpecification()).log().all()
                 .queryParam("name", name)
                 .when()
                 .post(EndPoints.BOARD.getEndPoint());
@@ -22,7 +23,7 @@ public class Board extends Hooks {
     }
 
     public void deleteBoard(String idBoard) {
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idBoard)
                 .when()
                 .delete(EndPoints.DELETE_BOARD.getEndPoint());

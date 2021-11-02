@@ -1,6 +1,7 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
+import api.utils.RequestSpecUtil;
 import hooks.Hooks;
 import io.restassured.response.Response;
 
@@ -9,13 +10,13 @@ import java.util.GregorianCalendar;
 
 import static io.restassured.RestAssured.given;
 
-public class Due extends Hooks {
+public class Due {
 
     public void createDue(String idCard) {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 1);
 
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idCard)
                 .queryParam("due", calendar.getTime())
                 .when()

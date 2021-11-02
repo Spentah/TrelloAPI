@@ -1,6 +1,7 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
+import api.utils.RequestSpecUtil;
 import hooks.Hooks;
 import io.restassured.response.Response;
 import api.utils.ResponseParser;
@@ -11,14 +12,14 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.given;
 
-public class CheckItem extends Hooks {
+public class CheckItem {
 
     private Map<String, String> itemsId = new HashMap<>();
 
     private String id;
 
     public void createCheckItem(String idChecklist, String name) {
-        Response response = given().spec(specification)
+        Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idChecklist)
                 .queryParam("name", name)
                 .when()
@@ -33,7 +34,7 @@ public class CheckItem extends Hooks {
     public void updateCheckItem(String idCard, String idCheckItem, String state) {
 
         if (state.equalsIgnoreCase("complete") || state.equalsIgnoreCase("incomplete")) {
-            Response response = given().spec(specification)
+            Response response = given().spec(RequestSpecUtil.getSpecification())
                     .pathParam("id", idCard)
                     .pathParam("idCheckItem", idCheckItem)
                     .queryParam("state", state)

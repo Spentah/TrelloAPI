@@ -13,7 +13,6 @@ public class DatabaseExecutor {
     }
 
     public static void getConnect() {
-
        try {
            Class.forName("org.postgresql.Driver");
            connection = DriverManager.getConnection(URL, USER, PASS);

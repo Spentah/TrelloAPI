@@ -13,7 +13,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class MainPage {
 
     private SelenideElement boardsButton = $x("//a[contains(@href,'/boards')]");
-    private SelenideElement kanbanTool = $x("//a[@title='KanbanTool']");
+    private List<SelenideElement> tools = $$x("//div[@class='board-tile-details-name']");
     private List<SelenideElement> boards = $$x("//div[@class='_1NHHI0mNN-7mZv']");
 
     public MainPage clickBoardsList() {
@@ -22,7 +22,10 @@ public class MainPage {
     }
 
     public MainPage clickOnBoardByName(String boardName) {
-        $x("//div[@title='" + boardName + "']").shouldBe(visible).click();
+//        $x("//div[@title='" + boardName + "']").shouldBe(visible).click();
+        SelenideElement board = tools.stream().filter(SelenideElement::exists).filter(element -> element.getText().equals(boardName))
+                .findFirst().orElseThrow(() -> new RuntimeException("Нет доски с таким именем"));
+        board.click();
         return this;
     }
 

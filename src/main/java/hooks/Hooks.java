@@ -1,5 +1,6 @@
 package hooks;
 
+import api.utils.RequestSpecUtil;
 import com.codeborne.selenide.Configuration;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -17,8 +18,7 @@ import java.util.logging.Logger;
 
 public class Hooks {
 
-    protected static RequestSpecification specification;
-    protected static RequestSpecification spec1;
+//    protected static RequestSpecification specification;
     protected static Logger LOGGER;
     protected static Board board = new Board();
 
@@ -27,17 +27,18 @@ public class Hooks {
         LOGGER = Logger.getLogger(Main.class.getName());
         DatabaseExecutor.getConnect();
 
-        specification = new RequestSpecBuilder()
-                .setBaseUri("https://api.trello.com")
-                .addQueryParam("key", DatabaseExecutor.executeValue("key"))
-                .addQueryParam("token", DatabaseExecutor.executeValue("token"))
-                .setAccept(ContentType.JSON)
-                .setContentType(ContentType.JSON)
-                .log(LogDetail.ALL)
-                .build();
+//        specification = new RequestSpecBuilder()
+//                .setBaseUri("https://api.trello.com/1/")
+//                .addQueryParam("key", DatabaseExecutor.executeValue("key"))
+//                .addQueryParam("token", DatabaseExecutor.executeValue("token"))
+//                .setAccept(ContentType.JSON)
+//                .setContentType(ContentType.JSON)
+//                .log(LogDetail.ALL)
+//                .build();
+        RequestSpecUtil.setSpecification();
+
         Configuration.startMaximized = true;
         System.getProperties().load(ClassLoader.getSystemResourceAsStream("users.properties"));
-        System.setProperty("webdriver.chrome.driver","D:\\chromedriver.exe");
         Configuration.timeout = 10000;
 
     }
