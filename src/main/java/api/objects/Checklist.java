@@ -2,7 +2,8 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-import hooks.Hooks;
+
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import api.utils.ResponseParser;
 
@@ -16,6 +17,7 @@ public class Checklist {
         return id;
     }
 
+    @Step("Создаем чеклист")
     public void createChecklist(String idCard) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idCard)

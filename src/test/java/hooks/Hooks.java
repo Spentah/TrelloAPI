@@ -8,6 +8,7 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 import api.objects.Board;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.reporters.jq.Main;
 import api.utils.DatabaseExecutor;
@@ -40,7 +41,6 @@ public class Hooks {
         Configuration.startMaximized = true;
         System.getProperties().load(ClassLoader.getSystemResourceAsStream("users.properties"));
         Configuration.timeout = 10000;
-
     }
 
     @AfterTest

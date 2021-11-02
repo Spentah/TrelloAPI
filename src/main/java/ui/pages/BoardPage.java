@@ -6,6 +6,8 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.*;
+
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -30,6 +32,7 @@ public class BoardPage {
     private SelenideElement windowMenu = Selenide.$x("//a[contains(@class,'window-cover-menu')]");
     private List<SelenideElement> headerButtons = $$x("//div[contains(@class,'board-header-btn')]");
 
+    @Step("Кликаем по крточке с названием '{name}'")
     public BoardPage clickOnCardByName(String name) {
         if (cards.stream().anyMatch(e -> e.getText().contains(name))) {
             cards.stream().filter(e -> e.getText().contains(name))
@@ -42,6 +45,7 @@ public class BoardPage {
         return this;
     }
 
+    @Step("Убеждаемся, что карточка '{cardName}' находится в колонке '{listName}'")
     public BoardPage isCardInList(String listName, String cardName) {
         board.shouldBe(appear);
         SelenideElement listHeader = listHeaders.stream()
@@ -53,6 +57,7 @@ public class BoardPage {
         return this;
     }
 
+    @Step("Убеждаемся, чекбокс '{name}' активирован")
     public BoardPage isCheckboxSelected(String name) {
         cardWindow.shouldBe(appear);
         Assert.assertTrue(
@@ -62,16 +67,19 @@ public class BoardPage {
         return this;
     }
 
+    @Step("Закрываем карточку")
     public BoardPage clickCloseButton() {
         closeButton.shouldBe(exist).click();
         return this;
     }
 
+    @Step("Кликаем по меню карточки")
     public BoardPage windowMenuClick() {
         windowMenu.shouldBe(exist).click();
         return this;
     }
 
+    @Step("Выбираем цвет обложки '{color}'")
     public BoardPage chooseAndClickOnColor(Colors color) {
         switch (color) {
             case GREEN : color.GREEN.getColor().shouldBe(exist).click();
@@ -100,6 +108,7 @@ public class BoardPage {
         return this;
     }
 
+    @Step("Активируем чекбокс даты")
     public BoardPage activateDateCheckbox() {
         if (dateCheckbox.parent().getAttribute("class").contains("is-due-complete")) {
             Logger.getLogger(BoardPage.class).error("Чекбокс даты уже активирован");
@@ -109,6 +118,7 @@ public class BoardPage {
         return this;
     }
 
+    @Step("Меняем имя доски с '{oldName}' на '{newName}'")
     public BoardPage renameBoard(String oldName, String newName) {
         SelenideElement inputField = headerButtons.stream().filter(SelenideElement::isDisplayed).filter(element -> element.getText().equals(oldName))
                 .findFirst().orElseThrow(() -> new RuntimeException("Нет поля с таким названием"));

@@ -2,7 +2,8 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-import hooks.Hooks;
+
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import api.utils.ResponseParser;
 
@@ -12,6 +13,7 @@ public class List {
 
     private String id;
 
+    @Step("Создаем колонку с названием '{listName}'")
     public void createList(String boardId, String listName) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", boardId)
@@ -22,6 +24,7 @@ public class List {
         id = ResponseParser.parse(response, "id");
     }
 
+    @Step("Перносим карточки из колонки 'Backlog' в колокну 'Done'")
     public void moveList(String idListOld, String idBoard, String idListNew) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idListOld)
@@ -31,6 +34,7 @@ public class List {
         response.then().statusCode(200);
     }
 
+    @Step("Архивируем колонку 'Backlog'")
     public void archiveList(String idList, boolean value) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idList)

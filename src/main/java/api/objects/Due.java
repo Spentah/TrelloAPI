@@ -2,7 +2,8 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-import hooks.Hooks;
+
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import java.util.Calendar;
@@ -12,6 +13,7 @@ import static io.restassured.RestAssured.given;
 
 public class Due {
 
+    @Step("В карточке добавляем ставим время выполнения завтрашний день")
     public void createDue(String idCard) {
         Calendar calendar = new GregorianCalendar();
         calendar.add(Calendar.DATE, 1);
@@ -21,7 +23,6 @@ public class Due {
                 .queryParam("due", calendar.getTime())
                 .when()
                 .put(EndPoints.UPDATE_CARD.getEndPoint());
-//                .put("/1/cards/{id}");
         response.then().statusCode(200);
     }
 }

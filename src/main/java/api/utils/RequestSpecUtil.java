@@ -1,5 +1,6 @@
 package api.utils;
 
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
@@ -17,7 +18,7 @@ public class RequestSpecUtil {
     }
 
     public static void setSpecification() {
-        specification = new io.restassured.builder.RequestSpecBuilder()
+        specification = new RequestSpecBuilder()
                 .setBaseUri("https://api.trello.com/1/")
                 .addQueryParam("key", DatabaseExecutor.executeValue("key"))
                 .addQueryParam("token", DatabaseExecutor.executeValue("token"))
