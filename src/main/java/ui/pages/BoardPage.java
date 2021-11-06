@@ -42,7 +42,6 @@ public class BoardPage {
         } else {
             Assert.fail("На доске нет карточки с названием " + name);
         }
-
         return this;
     }
 

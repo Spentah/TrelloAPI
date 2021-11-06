@@ -15,7 +15,6 @@ import java.util.logging.Logger;
 public class Hooks {
 
     protected static Logger LOGGER;
-    protected static Board board = new Board();
 
     @BeforeTest
     public void setUp() throws IOException {
@@ -30,7 +29,6 @@ public class Hooks {
     @AfterTest
     public void tearDown() {
         DatabaseExecutor.closeConnect();
-//        board.deleteBoard(board.getId());
         Board.deleteBoard("Только для образования");
     }
 }

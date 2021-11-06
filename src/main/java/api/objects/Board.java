@@ -12,7 +12,6 @@ import static io.restassured.RestAssured.given;
 
 public class Board {
 
-    private static String id;
     private static HashMap<String, String> idKeeper = new HashMap<>();
 
     @Step("Создаем доску с названием '{name}'")
@@ -23,22 +22,16 @@ public class Board {
                 .post(EndPoints.BOARD.getEndPoint());
         response.then().statusCode(200);
         idKeeper.put(name, ResponseParser.parse(response, "id"));
-//        id = ResponseParser.parse(response, "id");
     }
 
     @Step("Сворачиваем лавочку")
     public static void deleteBoard(String name) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idKeeper.get(name))
-//                .pathParam("id", idBoard)
                 .when()
                 .delete(EndPoints.DELETE_BOARD.getEndPoint());
         response.then().statusCode(200);
         idKeeper.clear();
-    }
-
-    public String getId() {
-        return id;
     }
 
     public static String getIdByName(String name) {
