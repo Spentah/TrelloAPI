@@ -1,5 +1,6 @@
 import api.objects.*;
 
+import api.utils.DatabaseExecutor;
 import hooks.Hooks;
 import org.testng.annotations.Test;
 import ui.pages.BoardPage;
@@ -16,7 +17,7 @@ public class TrelloTest extends Hooks {
         Board board = new Board();
         board.createBoard("KanbanTool");
         List list = new List();
-        list.createList(board.getId(), "Backlog");
+        list.createList(Board.getIdByName("KanbanTool"), "Backlog");
         Card card = new Card();
         card.createCard(list.getId(), "Карточка для изучения API");
         Attachment attachment = new Attachment();
@@ -30,24 +31,25 @@ public class TrelloTest extends Hooks {
         CheckItem checkItem = new CheckItem();
         checkItem.createCheckItem(checklist.getId(), "Понять протокол HTTP");
         checkItem.createCheckItem(checklist.getId(), "Выучить методы запросов");
-        checkItem.updateCheckItem(card.getId(), checkItem.getId("Понять протокол HTTP"), "complete");
+        checkItem.updateCheckItem(card.getId(), "Понять протокол HTTP", "complete");
         List newList = new List();
-        newList.createList(board.getId(), "Done");
-        newList.moveList(list.getId(), board.getId(), newList.getId());
+        newList.createList(Board.getIdByName("KanbanTool"), "Done");
+        newList.moveList(list.getId(), Board.getIdByName("KanbanTool"), newList.getId());
         list.archiveList(list.getId(), true);
-        checkItem.updateCheckItem(card.getId(), checkItem.getId("Выучить методы запросов"), "complete");
+        checkItem.updateCheckItem(card.getId(), "Выучить методы запросов", "complete");
         Sticker sticker = new Sticker();
         sticker.createSticker(card.getId(), "thumbsup", 50, 50, 0);
+        Board b = new Board();
     }
 
     @Test
     public void uiTest() {
         open("https://trello.com/");
         new LoginPage().clickSignUp()
-                .inputInField(LoginPage.Fields.USER, System.getProperty("bibaEmail"))
+                .input("user", DatabaseExecutor.extract("login"))
                 .sleep(3000)
                 .submit()
-                .inputInField(LoginPage.Fields.PASSWORD, System.getProperty("bibaPassword"))
+                .input("password", DatabaseExecutor.extract("password"))
                 .submit();
         new MainPage().clickBoardsList()
                 .clickOnBoardByName("KanbanTool");

@@ -1,5 +1,6 @@
 package ui.pages;
 
+import api.objects.Board;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import static com.codeborne.selenide.Condition.*;
@@ -124,6 +125,7 @@ public class BoardPage {
                 .findFirst().orElseThrow(() -> new RuntimeException("Нет поля с таким названием"));
         new Actions(inputField.getWrappedDriver()).moveToElement(inputField).click()
                 .sendKeys(Keys.BACK_SPACE, newName, Keys.ENTER).build().perform();
+        Board.updateName(newName, oldName);
         return this;
     }
 }

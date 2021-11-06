@@ -31,7 +31,7 @@ public class DatabaseExecutor {
         }
     }
 
-    public static String executeValue(String value) {
+    public static String extract(String value) {
         String result = null;
         try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM trello")) {
             ResultSet resultSet = statement.executeQuery();
@@ -41,7 +41,7 @@ public class DatabaseExecutor {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return result;
+        return Cryptor.decryptValue(result);
     }
 
 }

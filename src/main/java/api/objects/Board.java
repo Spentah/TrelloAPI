@@ -3,15 +3,17 @@ package api.objects;
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
 import api.utils.ResponseParser;
-
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+
+import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 
 public class Board {
 
-    private String id;
+    private static String id;
+    private static HashMap<String, String> idKeeper = new HashMap<>();
 
     @Step("Создаем доску с названием '{name}'")
     public void createBoard(String name) {
@@ -20,20 +22,31 @@ public class Board {
                 .when()
                 .post(EndPoints.BOARD.getEndPoint());
         response.then().statusCode(200);
-
-        id = ResponseParser.parse(response, "id");
+        idKeeper.put(name, ResponseParser.parse(response, "id"));
+//        id = ResponseParser.parse(response, "id");
     }
 
-    @Step("Удаляем доску с названием '{name}'")
-    public void deleteBoard(String idBoard) {
+    @Step("Сворачиваем лавочку")
+    public static void deleteBoard(String name) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
-                .pathParam("id", idBoard)
+                .pathParam("id", idKeeper.get(name))
+//                .pathParam("id", idBoard)
                 .when()
                 .delete(EndPoints.DELETE_BOARD.getEndPoint());
         response.then().statusCode(200);
+        idKeeper.clear();
     }
 
     public String getId() {
         return id;
+    }
+
+    public static String getIdByName(String name) {
+        return idKeeper.get(name);
+    }
+
+    public static void updateName(String newName, String oldName) {
+        idKeeper.put(newName, idKeeper.get(oldName));
+        idKeeper.remove(oldName);
     }
 }

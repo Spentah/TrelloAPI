@@ -16,8 +16,6 @@ public class CheckItem {
 
     private Map<String, String> itemsId = new HashMap<>();
 
-    private String id;
-
     @Step("Создаем чекбокс с названием '{name}'")
     public void createCheckItem(String idChecklist, String name) {
         Response response = given().spec(RequestSpecUtil.getSpecification())
@@ -30,12 +28,12 @@ public class CheckItem {
         itemsId.put(name, ResponseParser.parse(response, "id"));
     }
 
-    @Step("Активируем чекбокс '{idCheckItem}'")
-    public void updateCheckItem(String idCard, String idCheckItem, String state) {
+    @Step("Активируем чекбокс '{name}'")
+    public void updateCheckItem(String idCard, String name, String state) {
         if (state.equalsIgnoreCase("complete") || state.equalsIgnoreCase("incomplete")) {
             Response response = given().spec(RequestSpecUtil.getSpecification())
                     .pathParam("id", idCard)
-                    .pathParam("idCheckItem", idCheckItem)
+                    .pathParam("idCheckItem", getId(name))
                     .queryParam("state", state)
                     .when()
                     .put(EndPoints.UPDATE_CHECKITEM.getEndPoint());

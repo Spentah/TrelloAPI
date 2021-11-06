@@ -20,8 +20,8 @@ public class RequestSpecUtil {
     public static void setSpecification() {
         specification = new RequestSpecBuilder()
                 .setBaseUri("https://api.trello.com/1/")
-                .addQueryParam("key", DatabaseExecutor.executeValue("key"))
-                .addQueryParam("token", DatabaseExecutor.executeValue("token"))
+                .addQueryParam("key", DatabaseExecutor.extract("key"))
+                .addQueryParam("token", DatabaseExecutor.extract("token"))
                 .setAccept(ContentType.JSON)
                 .setContentType(ContentType.JSON)
                 .log(LogDetail.ALL)

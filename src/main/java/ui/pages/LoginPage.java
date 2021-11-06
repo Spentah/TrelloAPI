@@ -4,6 +4,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import org.openqa.selenium.By;
+
 import java.util.List;
 
 import static com.codeborne.selenide.Selenide.*;
@@ -12,7 +13,7 @@ import static com.codeborne.selenide.Condition.*;
 public class LoginPage {
     private SelenideElement submitButton = $x("//*[@type='submit']");
     private SelenideElement signupButton = $x("//a[@href='/login']");
-//            $$(By.xpath("//a[contains(@class,'btn')] | //input[contains(@class,'button')]"));
+    private List<SelenideElement> inputFields = $$x("//input");
     private SelenideElement userField = $(By.id("user"));
     private SelenideElement passwordField = $(By.id("password"));
 
@@ -22,14 +23,10 @@ public class LoginPage {
         return this;
     }
 
-    @Step("Вводим в поле '{field}' значение")
-    public LoginPage inputInField(LoginPage.Fields field, String value) {
-        switch (field) {
-            case USER : userField.setValue(value);
-                        break;
-            case PASSWORD : passwordField.setValue(value);
-                        break;
-        }
+    @Step("Вводим в поле '{name}' значение")
+    public LoginPage input(String name, String value) {
+        inputFields.stream().filter(e -> e.shouldBe(exist).getAttribute("name").equals(name))
+                .findFirst().get().setValue(value);
         return this;
     }
 
@@ -49,11 +46,5 @@ public class LoginPage {
         Selenide.sleep(timeInMillis);
         return this;
     }
-
-    public enum Fields {
-        USER,
-        PASSWORD;
-    }
-
 
 }
