@@ -28,7 +28,7 @@ public class Hooks {
 
     @AfterTest
     public void tearDown() {
+        Board.deleteBoard("KanbanTool");
         DatabaseExecutor.closeConnect();
-        Board.deleteBoard("Только для образования");
     }
 }
