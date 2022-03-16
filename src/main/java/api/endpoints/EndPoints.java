@@ -15,7 +15,7 @@ public enum EndPoints {
     CREATE_STICKER ("cards/{id}/stickers"),
     LIST ("boards/{id}/lists");
 
-    private String endPoint;
+    private final String endPoint;
 
     EndPoints(String endPoint) {
         this.endPoint = endPoint;

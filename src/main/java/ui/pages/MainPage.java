@@ -25,7 +25,9 @@ public class MainPage {
 
     @Step("Открываем доску с названием '{boardName}'")
     public MainPage clickOnBoardByName(String boardName) {
-        SelenideElement board = tools.stream().filter(SelenideElement::exists).filter(element -> element.getText().equals(boardName))
+        SelenideElement board = tools.stream()
+                .filter(SelenideElement::exists)
+                .filter(element -> element.getText().equals(boardName))
                 .findFirst().orElseThrow(() -> new RuntimeException("Нет доски с таким именем"));
         board.click();
         return this;

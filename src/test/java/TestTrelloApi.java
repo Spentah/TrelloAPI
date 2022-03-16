@@ -11,9 +11,9 @@ import ui.pages.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class TrelloTest extends Hooks {
+public class TestTrelloApi extends Hooks {
 
-    @Test
+    @Test(priority = 1, groups = "api")
     public void apiTest() {
         TrelloApi trelloApi = new TrelloApi();
         trelloApi
@@ -29,30 +29,9 @@ public class TrelloTest extends Hooks {
                 .updateCheckItem("Понять протокол HTTP")
                 .createList("Done")
                 .moveList("Backlog","Done")
-                .archiveList()
+//                .archiveList()
                 .updateCheckItem("Выучить методы запросов")
                 .createSticker();
     }
 
-    @Test
-    public void uiTest() {
-        open("https://trello.com/");
-        new LoginPage().clickSignUp()
-                .input("user", DatabaseExecutor.extract("login"))
-                .sleep(3000)
-                .submit()
-                .input("password", DatabaseExecutor.extract("password"))
-                .submit();
-        new MainPage().clickBoardsList()
-                .clickOnBoardByName("KanbanTool");
-        new BoardPage().isCardInList("Done", "Карточка для изучения API")
-                .clickOnCardByName("Карточка для изучения API")
-                .isCheckboxSelected("Понять протокол HTTP")
-                .isCheckboxSelected("Выучить методы запросов")
-                .windowMenuClick()
-                .chooseAndClickOnColor(Colors.GREEN)
-                .activateDateCheckbox()
-                .clickCloseButton()
-                .renameBoard("KanbanTool", "Только для образования");
-    }
 }

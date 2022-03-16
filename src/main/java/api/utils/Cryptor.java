@@ -4,7 +4,7 @@ import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 
 public class Cryptor {
 
-    private final static String SALT = "password";
+    private static final String SALT = "password";
 
     private Cryptor() {
 

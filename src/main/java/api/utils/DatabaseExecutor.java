@@ -3,9 +3,9 @@ package api.utils;
 import java.sql.*;
 
 public class DatabaseExecutor {
-    private final static String USER = "postgres";
-    private final static String PASS = "1";
-    private final static String URL = "jdbc:postgresql://localhost:5432/trello_db";
+    private static final String USER = "postgres";
+    private static final String PASS = "1";
+    private static final String URL = "jdbc:postgresql://localhost:5432/trello_db";
     private static Connection connection;
 
     private DatabaseExecutor() {
@@ -16,10 +16,8 @@ public class DatabaseExecutor {
        try {
            Class.forName("org.postgresql.Driver");
            connection = DriverManager.getConnection(URL, USER, PASS);
-       } catch (SQLException e) {
+       } catch (SQLException | ClassNotFoundException e) {
            e.printStackTrace();
-       } catch (ClassNotFoundException exception) {
-           exception.printStackTrace();
        }
     }
 
