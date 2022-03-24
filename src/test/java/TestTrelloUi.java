@@ -1,4 +1,5 @@
 import api.utils.DatabaseExecutor;
+import hooks.Hooks;
 import org.testng.annotations.Test;
 import ui.pages.BoardPage;
 import ui.pages.LoginPage;
@@ -6,9 +7,9 @@ import ui.pages.MainPage;
 
 import static com.codeborne.selenide.Selenide.open;
 
-public class TestTrelloUi {
+public class TestTrelloUi extends Hooks {
 
-    @Test(priority = 2, groups = "ui")
+    @Test(groups = {"ui"})
     public void uiTest() {
         open("https://trello.com/");
         new LoginPage()

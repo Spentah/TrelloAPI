@@ -1,19 +1,14 @@
 package hooks;
 
 import api.utils.RequestSpecUtil;
-import com.codeborne.selenide.Config;
 import com.codeborne.selenide.Configuration;
-import api.objects.Board;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
-import com.codeborne.selenide.logevents.SelenideLogger;
-import io.qameta.allure.selenide.AllureSelenide;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 import org.testng.reporters.jq.Main;
 import api.utils.DatabaseExecutor;
 
@@ -28,7 +23,7 @@ public class Hooks {
     private static Logger LOGGER;
     private static final String SELENOID_HUB = "http://localhost:4444/wd/hub/";
 
-    @BeforeTest
+    @BeforeTest(alwaysRun = true)
     public void setUp() throws IOException {
         LOGGER = Logger.getLogger(Main.class.getName());
 //        setUpSelenoid();
@@ -54,7 +49,7 @@ public class Hooks {
         }
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     public void tearDown() {
         Selenide.closeWebDriver();
 //        Board.deleteBoard("KanbanTool");

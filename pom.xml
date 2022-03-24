@@ -15,6 +15,7 @@
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <aspectj.version>1.8.10</aspectj.version>
         <allure-testng.version>2.14.0</allure-testng.version>
+        <env>STRING</env>
     </properties>
 
     <dependencies>
@@ -73,6 +74,22 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.21.0</version>
                 <configuration>
+<!--                    Работает! -->
+<!--                    <environmentVariables>-->
+<!--                        <my_env>VALUE</my_env>-->
+<!--                    </environmentVariables>-->
+
+<!--                    Тоже работает! Различия лишь в том, что чтобы получить значение переменной нужно вызывать разные методы
+                        (System.getProperty() или System.getenv())-->
+<!--                    <systemPropertyVariables>-->
+<!--                        <dev>DEV env value</dev>-->
+<!--                        <preprod>PREPROD env value</preprod>-->
+<!--                        <prod>PROD env value</prod>-->
+<!--                    </systemPropertyVariables>-->
+                    <systemPropertyVariables>
+                        <stand>${stand.name}</stand>
+                        <url>${url}</url>
+                    </systemPropertyVariables>
                     <testFailureIgnore>false</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
@@ -111,5 +128,26 @@
             </plugin>
         </plugins>
     </build>
+
+<!--    mvn clean test -Pprod -Denviroment=prod -Dgroups=testing
+        для использования профилей-->
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <stand.name>DEV STAND</stand.name>
+                <url>DEV URL</url>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>prod</id>
+            <properties>
+                <stand.name>PROD STAND</stand.name>
+                <url>PROD URL</url>
+            </properties>
+        </profile>
+    </profiles>
+
 
 </project>

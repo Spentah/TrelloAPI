@@ -56,15 +56,10 @@ public class BoardPage {
     @Step("Убеждаемся, чекбокс '{name}' активирован")
     public BoardPage isCheckboxSelected(String name) {
         cardWindow.shouldBe(appear);
-//        checkedCheckboxes.get(0).shouldNotHave(Condition.)
-        try {
             Assert.assertTrue(
                     checkedCheckboxes.stream().filter(e -> e.shouldNotHave(text(""), Duration.of(10, ChronoUnit.SECONDS)).shouldBe(visible).getText().equals(name))
                             .findFirst().isPresent(),
                     "Чекбокс " + name + " не активирован");
-        } catch (AssertionError e) {
-
-        }
         return this;
     }
 

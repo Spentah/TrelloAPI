@@ -3,6 +3,7 @@ import api.objects.*;
 
 import api.utils.DatabaseExecutor;
 import hooks.Hooks;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import ui.pages.BoardPage;
 import ui.Colors;
@@ -13,7 +14,7 @@ import static com.codeborne.selenide.Selenide.open;
 
 public class TestTrelloApi extends Hooks {
 
-    @Test(priority = 1, groups = "api")
+    @Test(groups = {"api"})
     public void apiTest() {
         TrelloApi trelloApi = new TrelloApi();
         trelloApi
@@ -32,6 +33,15 @@ public class TestTrelloApi extends Hooks {
 //                .archiveList()
                 .updateCheckItem("Выучить методы запросов")
                 .createSticker();
+    }
+
+    @Parameters("environment")
+    @Test(groups = {"testing"})
+    public void testing(String environment) {
+        System.out.println("Current environment - " + environment);
+        System.out.println("Current stand name - " + System.getProperty("stand"));
+        System.out.println("Current value - " + System.getProperty("url"));
+//        System.out.println("Current value of env - " + System.getenv("my_env"));
     }
 
 }
