@@ -35,10 +35,10 @@ public class TestTrelloApi extends Hooks {
                 .createSticker();
     }
 
-    @Parameters("environment")
+//    @Parameters("environment")
     @Test(groups = {"testing"})
-    public void testing(String environment) {
-        System.out.println("Current environment - " + environment);
+    public void testing() {
+//        System.out.println("Current environment - " + environment);
         System.out.println("Current stand name - " + System.getProperty("stand"));
         System.out.println("Current value - " + System.getProperty("url"));
 //        System.out.println("Current value of env - " + System.getenv("my_env"));
