@@ -1,12 +1,10 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
-import api.endpoints.EndPoints1;
 import api.utils.RequestSpecUtil;
-
+import api.utils.ResponseParser;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import api.utils.ResponseParser;
 
 import static io.restassured.RestAssured.given;
 
