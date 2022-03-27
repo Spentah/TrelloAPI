@@ -7,7 +7,7 @@ pipeline {
     }
 
     parameters{
-        choice(description: 'Choose stand', name: 'stand', defaultValue: 'prod')
+        choice(description: 'Choose stand', name: 'stand', choices: ['prod', 'dev'])
         string(description: 'groups to run', name: 'group')
     }
 
