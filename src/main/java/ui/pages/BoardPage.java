@@ -57,7 +57,7 @@ public class BoardPage {
     public BoardPage isCheckboxSelected(String name) {
         cardWindow.shouldBe(appear);
             Assert.assertTrue(
-                    checkedCheckboxes.stream().filter(e -> e.shouldNotHave(text(""), Duration.of(10, ChronoUnit.SECONDS)).shouldBe(visible).getText().equals(name))
+                    checkedCheckboxes.stream().filter(e -> e.shouldNotHave(exactText(""), Duration.of(10, ChronoUnit.SECONDS)).shouldBe(visible).getText().equals(name))
                             .findFirst().isPresent(),
                     "Чекбокс " + name + " не активирован");
         return this;
