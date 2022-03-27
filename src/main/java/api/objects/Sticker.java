@@ -2,7 +2,6 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -16,7 +15,7 @@ public class Sticker {
                 .pathParam("id", idCard)
                 .queryParams("image", stickerName, "top", top, "left", left, "zIndex", zIndex)
                 .when()
-                .post(EndPoints.CREATE_STICKER.getEndPoint());
+                .post(EndPoints.CREATE_STICKER);
         response.then().statusCode(200);
     }
 }

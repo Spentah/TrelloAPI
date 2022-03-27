@@ -1,27 +1,21 @@
 package api.endpoints;
 
-public enum EndPoints {
+public class EndPoints {
 
-    CARD ("cards"),
-    UPDATE_CARD ("cards/{id}"),
-    BOARD ("boards/"),
-    DELETE_BOARD("boards/{id}"),
-    CHECKLIST ("cards/{id}/checklists"),
-    CHECKITEM ("checklists/{id}/checkItems"),
-    ATTACHMENT ("cards/{id}/attachments"),
-    UPDATE_CHECKITEM ("cards/{id}/checkItem/{idCheckItem}"),
-    MOVE_CARD ("lists/{id}/moveAllCards"),
-    ARCHIVE_LIST ("lists/{id}/closed"),
-    CREATE_STICKER ("cards/{id}/stickers"),
-    LIST ("boards/{id}/lists");
-
-    private final String endPoint;
-
-    EndPoints(String endPoint) {
-        this.endPoint = endPoint;
+    private EndPoints() {
     }
 
-    public String getEndPoint() {
-        return endPoint;
-    }
+    public static final String CARD = "cards";
+    public static final String UPDATE_CARD = "cards/{id}";
+    public static final String BOARD = "boards/";
+    public static final String DELETE_BOARD = "boards/{id}";
+    public static final String CHECKLIST = "cards/{id}/checklists";
+    public static final String CHECKITEM = "checklists/{id}/checkItems";
+    public static final String ATTACHMENT = "cards/{id}/attachments";
+    public static final String UPDATE_CHECKITEM = "cards/{id}/checkItem/{idCheckItem}";
+    public static final String ARCHIVE_LIST = "lists/{id}/closed";
+    public static final String MOVE_CARD = "lists/{id}/moveAllCards";
+    public static final String CREATE_STICKER = "cards/{id}/stickers";
+    public static final String LIST = "boards/{id}/lists";
+
 }

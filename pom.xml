@@ -74,18 +74,6 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.21.0</version>
                 <configuration>
-<!--                    Работает! -->
-<!--                    <environmentVariables>-->
-<!--                        <my_env>VALUE</my_env>-->
-<!--                    </environmentVariables>-->
-
-<!--                    Тоже работает! Различия лишь в том, что чтобы получить значение переменной нужно вызывать разные методы
-                        (System.getProperty() или System.getenv())-->
-<!--                    <systemPropertyVariables>-->
-<!--                        <dev>DEV env value</dev>-->
-<!--                        <preprod>PREPROD env value</preprod>-->
-<!--                        <prod>PROD env value</prod>-->
-<!--                    </systemPropertyVariables>-->
                     <systemPropertyVariables>
                         <stand>${stand.name}</stand>
                         <url>${url}</url>
@@ -148,6 +136,5 @@
             </properties>
         </profile>
     </profiles>
-
 
 </project>

@@ -15,7 +15,7 @@ public class Attachment {
                 .pathParam("id", cardId)
                 .queryParam("url", url)
                 .when()
-                .post(EndPoints.ATTACHMENT.getEndPoint());
+                .post(EndPoints.ATTACHMENT);
         response.then().statusCode(200);
 
     }

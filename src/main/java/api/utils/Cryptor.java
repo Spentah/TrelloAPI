@@ -22,16 +22,4 @@ public class Cryptor {
         return encryptor.decrypt(encryptedPassword);
     }
 
-//    public static void main(String[] args) {
-//        DatabaseExecutor.getConnect();
-//        String user = "bibathecoder@gmail.com";
-//        String encrypted = encrypt(user);
-//        System.out.println(encrypted);
-//        System.out.println(decryptValue(encrypted));
-////        System.out.println(DatabaseExecutor.executeValue("login"));
-//
-//        DatabaseExecutor.closeConnect();
-//    }
-
-
 }

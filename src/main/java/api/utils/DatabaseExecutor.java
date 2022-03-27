@@ -3,13 +3,12 @@ package api.utils;
 import java.sql.*;
 
 public class DatabaseExecutor {
-    private static final String USER = "postgres";
-    private static final String PASS = "1";
-    private static final String URL = "jdbc:postgresql://localhost:5432/trello_db";
+    private static final String USER = System.getProperty("db.user");
+    private static final String PASS = System.getProperty("db.password");
+    private static final String URL = System.getProperty("db.url");
     private static Connection connection;
 
     private DatabaseExecutor() {
-
     }
 
     public static void getConnect() {

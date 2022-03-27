@@ -1,16 +1,6 @@
 import api.TrelloApi;
-import api.objects.*;
-
-import api.utils.DatabaseExecutor;
 import hooks.Hooks;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import ui.pages.BoardPage;
-import ui.Colors;
-import ui.pages.LoginPage;
-import ui.pages.MainPage;
-
-import static com.codeborne.selenide.Selenide.open;
 
 public class TestTrelloApi extends Hooks {
 
@@ -29,19 +19,15 @@ public class TestTrelloApi extends Hooks {
                 .createCheckItem("Выучить методы запросов")
                 .updateCheckItem("Понять протокол HTTP")
                 .createList("Done")
-                .moveList("Backlog","Done")
-//                .archiveList()
+                .moveList("Backlog", "Done")
                 .updateCheckItem("Выучить методы запросов")
                 .createSticker();
     }
 
-//    @Parameters("environment")
     @Test(groups = {"testing"})
     public void testing() {
-//        System.out.println("Current environment - " + environment);
         System.out.println("Current stand name - " + System.getProperty("stand"));
         System.out.println("Current value - " + System.getProperty("url"));
-//        System.out.println("Current value of env - " + System.getenv("my_env"));
     }
 
 }

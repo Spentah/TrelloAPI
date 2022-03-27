@@ -1,6 +1,7 @@
 package api.objects;
 
 import api.endpoints.EndPoints;
+import api.endpoints.EndPoints1;
 import api.utils.RequestSpecUtil;
 
 import io.qameta.allure.Step;
@@ -22,7 +23,7 @@ public class Checklist {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idCard)
                 .when()
-                .post(EndPoints.CHECKLIST.getEndPoint());
+                .post(EndPoints.CHECKLIST);
         response.then().statusCode(200);
 
         id = ResponseParser.parse(response, "id");

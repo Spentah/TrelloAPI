@@ -2,10 +2,9 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-
+import api.utils.ResponseParser;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import api.utils.ResponseParser;
 
 import static io.restassured.RestAssured.given;
 
@@ -18,7 +17,7 @@ public class List {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", boardId)
                 .queryParam("name", listName)
-                .post(EndPoints.LIST.getEndPoint());
+                .post(EndPoints.LIST);
         response.then().statusCode(200);
 
         id = ResponseParser.parse(response, "id");
@@ -30,7 +29,7 @@ public class List {
                 .pathParam("id", idListOld)
                 .queryParams("idBoard", idBoard, "idList", idListNew)
                 .when()
-                .post(EndPoints.MOVE_CARD.getEndPoint());
+                .post(EndPoints.MOVE_CARD);
         response.then().statusCode(200);
     }
 
@@ -40,7 +39,7 @@ public class List {
                 .pathParam("id", idList)
                 .queryParams("value", value)
                 .when()
-                .put(EndPoints.ARCHIVE_LIST.getEndPoint());
+                .put(EndPoints.ARCHIVE_LIST);
         response.then().statusCode(200);
     }
 

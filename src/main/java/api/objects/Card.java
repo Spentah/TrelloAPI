@@ -2,9 +2,9 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
+import api.utils.ResponseParser;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import api.utils.ResponseParser;
 
 import static io.restassured.RestAssured.given;
 
@@ -18,7 +18,7 @@ public class Card {
                 .queryParam("idList", idList)
                 .queryParam("name", name)
                 .when()
-                .post(EndPoints.CARD.getEndPoint());
+                .post(EndPoints.CARD);
         response.then().statusCode(200);
 
         id = ResponseParser.parse(response, "id");

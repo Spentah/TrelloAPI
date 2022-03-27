@@ -2,9 +2,9 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
+import api.utils.ResponseParser;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import api.utils.ResponseParser;
 import org.testng.Assert;
 
 import java.util.HashMap;
@@ -22,7 +22,7 @@ public class CheckItem {
                 .pathParam("id", idChecklist)
                 .queryParam("name", name)
                 .when()
-                .post(EndPoints.CHECKITEM.getEndPoint());
+                .post(EndPoints.CHECKITEM);
         response.then().statusCode(200);
 
         itemsId.put(name, ResponseParser.parse(response, "id"));
@@ -36,7 +36,7 @@ public class CheckItem {
                     .pathParam("idCheckItem", getId(name))
                     .queryParam("state", state)
                     .when()
-                    .put(EndPoints.UPDATE_CHECKITEM.getEndPoint());
+                    .put(EndPoints.UPDATE_CHECKITEM);
             response.then().statusCode(200);
         } else {
             Assert.fail("Введенные данные не подходят. Параметр \"state\" может быть равен только complete или incomplete");

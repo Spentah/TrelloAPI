@@ -19,7 +19,7 @@ public class Board {
         Response response = given().spec(RequestSpecUtil.getSpecification()).log().all()
                 .queryParam("name", name)
                 .when()
-                .post(EndPoints.BOARD.getEndPoint());
+                .post(EndPoints.BOARD);
         response.then().statusCode(200);
         idKeeper.put(name, ResponseParser.parse(response, "id"));
     }
@@ -29,7 +29,7 @@ public class Board {
         Response response = given().spec(RequestSpecUtil.getSpecification())
                 .pathParam("id", idKeeper.get(name))
                 .when()
-                .delete(EndPoints.DELETE_BOARD.getEndPoint());
+                .delete(EndPoints.DELETE_BOARD);
         response.then().statusCode(200);
         idKeeper.clear();
     }

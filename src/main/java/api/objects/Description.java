@@ -2,7 +2,6 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -16,7 +15,7 @@ public class Description {
                 .pathParam("id", idCard)
                 .queryParam("desc", description)
                 .when()
-                .put(EndPoints.UPDATE_CARD.getEndPoint());
+                .put(EndPoints.UPDATE_CARD);
         response.then().statusCode(200);
     }
 

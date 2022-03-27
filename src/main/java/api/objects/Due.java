@@ -2,7 +2,6 @@ package api.objects;
 
 import api.endpoints.EndPoints;
 import api.utils.RequestSpecUtil;
-
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -22,7 +21,7 @@ public class Due {
                 .pathParam("id", idCard)
                 .queryParam("due", calendar.getTime())
                 .when()
-                .put(EndPoints.UPDATE_CARD.getEndPoint());
+                .put(EndPoints.UPDATE_CARD);
         response.then().statusCode(200);
     }
 }
