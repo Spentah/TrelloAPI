@@ -17,15 +17,14 @@ pipeline {
                 bat "mvn -P${params.stand} -Dgroups=${params.group} clean test"
             }
         }
-        stage('Create report') {
-            steps {
-                always{
-                    allure([
-                        reportBuildPolicy: 'ALWAYS',
-                        results: [[path: 'allure-results']]
-                    ])
-                }
-            }
+    }
+
+    post {
+        always {
+            allure([
+                reportBuildPolicy: 'ALWAYS',
+                results: [[path: 'allure-results']]
+            ])
         }
     }
 }
