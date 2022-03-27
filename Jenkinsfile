@@ -7,13 +7,13 @@ pipeline {
     }
 
     parameters{
-        stringParam(description: 'groups to run', name: 'group')
+        string(description: 'groups to run', name: 'group')
     }
 
     stages {
         stage('Run tests') {
             steps {
-                bat "mvn clean -Dgroups=$group test"
+                bat "mvn -Dgroups=${params.group} clean test"
             }
         }
     }
