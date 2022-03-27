@@ -7,13 +7,14 @@ pipeline {
     }
 
     parameters{
+        choice(description: 'Choose stand', name: 'stand', defaultValue: 'prod')
         string(description: 'groups to run', name: 'group')
     }
 
     stages {
         stage('Run tests') {
             steps {
-                bat "mvn -Dgroups=${params.group} clean test"
+                bat "mvn -P${params.stand} -Dgroups=${params.group} clean test"
             }
         }
     }
