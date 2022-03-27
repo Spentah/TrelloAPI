@@ -25,12 +25,12 @@ public class Hooks {
 
     @BeforeTest(alwaysRun = true)
     public void setUp() throws IOException {
+        System.getProperties().load(ClassLoader.getSystemResourceAsStream("users.properties"));
         LOGGER = Logger.getLogger(Main.class.getName());
 //        setUpSelenoid();
         DatabaseExecutor.getConnect();
         RequestSpecUtil.setSpecification();
         Configuration.startMaximized = true;
-        System.getProperties().load(ClassLoader.getSystemResourceAsStream("users.properties"));
         Configuration.timeout = 10000;
 //        SelenideLogger.addListener("allure", new AllureSelenide());
     }
