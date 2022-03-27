@@ -8,7 +8,7 @@ pipeline {
 
     parameters{
         choice(description: 'Choose stand', name: 'stand', choices: ['prod', 'dev'])
-        string(description: 'groups to run', name: 'group')
+        string(description: 'Groups to run', name: 'group')
     }
 
     stages {
@@ -17,14 +17,24 @@ pipeline {
                 bat "mvn -P${params.stand} -Dgroups=${params.group} clean test"
             }
         }
-    }
-
-    post{
-        always{
-            allure([
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'allure-results']]
-            ])
+        stage('Create report') {
+            steps {
+                always{
+                    allure([
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'allure-results']]
+                    ])
+                }
+            }
         }
     }
-}
+
+//     post{
+//         always{
+//             allure([
+//                 reportBuildPolicy: 'ALWAYS',
+//                 results: [[path: 'allure-results']]
+//             ])
+//         }
+//     }
+// }
