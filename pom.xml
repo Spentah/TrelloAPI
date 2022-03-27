@@ -78,7 +78,7 @@
                         <stand>${stand.name}</stand>
                         <url>${url}</url>
                     </systemPropertyVariables>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <argLine>
                         -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
