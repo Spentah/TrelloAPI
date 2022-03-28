@@ -15,10 +15,12 @@ pipeline {
     stages {
         stage('Run tests') {
             steps {
-                if (params.env == true) {
-                    bat "mvn -P${params.stand} -Dgroups=${params.group} clean test"
-                } else {
-                    bat "mvn -Dgroups=${params.group} clean test"
+                script {
+                    if (params.env == true) {
+                        bat "mvn -P${params.stand} -Dgroups=${params.group} clean test"
+                    } else {
+                        bat "mvn -Dgroups=${params.group} clean test"
+                    }
                 }
             }
         }
