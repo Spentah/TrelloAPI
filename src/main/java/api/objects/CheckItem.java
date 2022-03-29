@@ -14,7 +14,7 @@ import static io.restassured.RestAssured.given;
 
 public class CheckItem {
 
-    private Map<String, String> itemsId = new HashMap<>();
+    private final Map<String, String> itemsId = new HashMap<>();
 
     @Step("Создаем чекбокс с названием '{name}'")
     public void createCheckItem(String idChecklist, String name) {
@@ -22,7 +22,7 @@ public class CheckItem {
                 .pathParam("id", idChecklist)
                 .queryParam("name", name)
                 .when()
-                .post(EndPoints.CHECKITEM);
+                .post(EndPoints.CHECK_ITEM);
         response.then().statusCode(200);
 
         itemsId.put(name, ResponseParser.parse(response, "id"));
@@ -40,7 +40,6 @@ public class CheckItem {
             response.then().statusCode(200);
         } else {
             Assert.fail("Введенные данные не подходят. Параметр \"state\" может быть равен только complete или incomplete");
-            return;
         }
     }
 

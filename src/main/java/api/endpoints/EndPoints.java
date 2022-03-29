@@ -10,7 +10,7 @@ public class EndPoints {
     public static final String BOARD = "boards/";
     public static final String DELETE_BOARD = "boards/{id}";
     public static final String CHECKLIST = "cards/{id}/checklists";
-    public static final String CHECKITEM = "checklists/{id}/checkItems";
+    public static final String CHECK_ITEM = "checklists/{id}/checkItems";
     public static final String ATTACHMENT = "cards/{id}/attachments";
     public static final String UPDATE_CHECKITEM = "cards/{id}/checkItem/{idCheckItem}";
     public static final String ARCHIVE_LIST = "lists/{id}/closed";

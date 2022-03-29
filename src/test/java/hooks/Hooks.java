@@ -20,19 +20,17 @@ import java.util.logging.Logger;
 
 public class Hooks {
 
-    private static Logger LOGGER;
+    private static Logger LOGGER = Logger.getLogger(Main.class.getName());;
     private static final String SELENOID_HUB = "http://localhost:4444/wd/hub/";
 
     @BeforeTest(alwaysRun = true)
     public void setUp() throws IOException {
         System.getProperties().load(ClassLoader.getSystemResourceAsStream("users.properties"));
-        LOGGER = Logger.getLogger(Main.class.getName());
 //        setUpSelenoid();
         DatabaseExecutor.getConnect();
         RequestSpecUtil.setSpecification();
         Configuration.startMaximized = true;
         Configuration.timeout = 10000;
-//        SelenideLogger.addListener("allure", new AllureSelenide());
     }
 
     public static void setUpSelenoid() {
