@@ -117,8 +117,6 @@
         </plugins>
     </build>
 
-<!--    mvn clean test -Pprod -Denviroment=prod -Dgroups=testing
-        для использования профилей-->
     <profiles>
         <profile>
             <id>dev</id>

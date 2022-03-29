@@ -27,7 +27,7 @@ public class TestTrelloApi extends Hooks {
     @Test(groups = {"testing"})
     public void testing() {
         System.out.println("Current stand name - " + System.getProperty("stand"));
-        System.out.println("Current value - " + System.getProperty("url"));
+        System.out.println("Current url - " + System.getProperty("url"));
     }
 
 }
