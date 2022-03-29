@@ -4,12 +4,7 @@
     <test name="UiTest">
         <classes>
             <class name="TestTrelloUi"/>
+            <class name="TestTrelloApi"/>
         </classes>
-    </test>
-
-    <test name="ApiTest">
-    <classes>
-        <class name="TestTrelloApi"/>
-    </classes>
     </test>
 </suite>
