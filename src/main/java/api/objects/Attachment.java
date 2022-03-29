@@ -17,6 +17,5 @@ public class Attachment {
                 .when()
                 .post(EndPoints.ATTACHMENT);
         response.then().statusCode(200);
-
     }
 }

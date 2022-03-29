@@ -20,7 +20,7 @@ import java.util.logging.Logger;
 
 public class Hooks {
 
-    private static Logger LOGGER = Logger.getLogger(Main.class.getName());;
+    private static Logger LOGGER = Logger.getLogger(Main.class.getName());
     private static final String SELENOID_HUB = "http://localhost:4444/wd/hub/";
 
     @BeforeTest(alwaysRun = true)
