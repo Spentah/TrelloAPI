@@ -15,7 +15,8 @@
         <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
         <aspectj.version>1.8.10</aspectj.version>
         <allure-testng.version>2.14.0</allure-testng.version>
-        <env>STRING</env>
+        <url>DEV URL</url>
+        <stand.name>DEV STAND</stand.name>
     </properties>
 
     <dependencies>
