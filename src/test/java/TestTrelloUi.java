@@ -28,11 +28,5 @@ public class TestTrelloUi extends Hooks {
                 .clickOnCardByName("Карточка для изучения API")
                 .isCheckboxSelected("Понять протокол HTTP")
                 .isCheckboxSelected("Выучить методы запросов");
-//                .windowMenuClick()
-//                .chooseAndClickOnColor(Colors.GREEN)
-//                .activateDateCheckbox()
-//                .clickCloseButton()
-//                .renameBoard("KanbanTool", "Только для образования");
     }
-
 }

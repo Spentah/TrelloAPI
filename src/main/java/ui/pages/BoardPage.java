@@ -1,7 +1,6 @@
 package ui.pages;
 
 import api.objects.Board;
-import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
@@ -10,8 +9,6 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.log4testng.Logger;
-import org.testng.reporters.jq.Main;
-import ui.Colors;
 
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
@@ -30,6 +27,7 @@ public class BoardPage {
     private SelenideElement closeButton = Selenide.$x("//a[contains(@class,'icon-close') and not (contains(@class,'icon-lg'))]");
     private SelenideElement windowMenu = Selenide.$x("//a[contains(@class,'window-cover-menu')]");
     private List<SelenideElement> headerButtons = $$x("//div[contains(@class,'board-header-btn')]");
+    private SelenideElement colorGreen = $x("//button[@class='_31xT7xOqkxPLkw _1hFyzxe1-LRBw8']");
 
     @Step("Кликаем по карточке с названием '{name}'")
     public BoardPage clickOnCardByName(String name) {
@@ -56,10 +54,10 @@ public class BoardPage {
     @Step("Убеждаемся, чекбокс '{name}' активирован")
     public BoardPage isCheckboxSelected(String name) {
         cardWindow.shouldBe(appear);
-            Assert.assertTrue(
-                    checkedCheckboxes.stream().filter(e -> e.shouldNotHave(exactText(""), Duration.of(10, ChronoUnit.SECONDS)).shouldBe(visible).getText().equals(name))
-                            .findFirst().isPresent(),
-                    "Чекбокс " + name + " не активирован");
+        Assert.assertTrue(
+                checkedCheckboxes.stream().filter(e -> e.shouldNotHave(exactText(""), Duration.of(10, ChronoUnit.SECONDS)).shouldBe(visible).getText().equals(name))
+                        .findFirst().isPresent(),
+                "Чекбокс " + name + " не активирован");
         return this;
     }
 
@@ -82,31 +80,8 @@ public class BoardPage {
 //    }
 
     @Step("Выбираем цвет обложки '{color}'")
-    public BoardPage chooseAndClickOnColor(Colors color) {
-        switch (color) {
-            case GREEN : color.GREEN.getColor().shouldBe(exist).click();
-                break;
-            case YELLOW : color.YELLOW.getColor().shouldBe(exist).click();
-                break;
-            case ORANGE : color.ORANGE.getColor().shouldBe(exist).click();
-                break;
-            case RED : color.RED.getColor().shouldBe(exist).click();
-                break;
-            case PURPLE : color.PURPLE.getColor().shouldBe(exist).click();
-                break;
-            case DARK_BLUE : color.DARK_BLUE.getColor().shouldBe(exist).click();
-                break;
-            case BLUE : color.BLUE.getColor().shouldBe(exist).click();
-                break;
-            case SALAT : color.SALAT.getColor().shouldBe(exist).click();
-                break;
-            case PINK : color.PINK.getColor().shouldBe(exist).click();
-                break;
-            case BLACK : color.BLACK.getColor().shouldBe(exist).click();
-                break;
-            default :
-                Logger.getLogger(Main.class).error("Выбранный цвет не присутсвует на форме.");
-        }
+    public BoardPage chooseAndClickOnColor() {
+        colorGreen.shouldBe(exist).click();
         return this;
     }
 
