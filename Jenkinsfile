@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Run tests') {
             steps {
-                bat "mvn -P${params.stand} -Dgroups=${params.group} clean test"
+                sh "mvn -P${params.stand} -Dgroups=${params.group} clean test"
             }
         }
     }
