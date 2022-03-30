@@ -1,9 +1,6 @@
 pipeline {
-    agent any
-
-    tools {
-        jdk "JDK 1.8"
-        maven "maven 3.6.3"
+    agent {
+        dockerfile true
     }
 
     parameters{
