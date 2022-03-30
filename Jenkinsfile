@@ -1,5 +1,10 @@
 pipeline {
-    agent { dockerfile true }
+    agent {
+        docker {
+            label 'windows'
+            image 'non-build-project'
+        }
+    }
 
     parameters{
         booleanParam(description: 'Use custom environment', defaultValue: false, name: 'env')
